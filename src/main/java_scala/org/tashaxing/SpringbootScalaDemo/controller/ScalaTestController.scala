@@ -123,6 +123,7 @@ class ScalaTestController @Autowired()(private val scalaModelQuery: ScalaModelQu
     @RequestMapping(value = Array("/add"), method = Array(RequestMethod.POST))
     def save(@RequestBody scalaModel: ScalaModel): ScalaModel =
     {
+        // notice here use RequestBody
         val res = scalaModelQuery.save(scalaModel)
         return res
     }

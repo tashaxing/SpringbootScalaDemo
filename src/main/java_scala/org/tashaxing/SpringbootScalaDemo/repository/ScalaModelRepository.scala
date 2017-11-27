@@ -13,6 +13,6 @@ trait ScalaModelRepository extends JpaRepository[ScalaModel, Long]
     def findByName(name: String): List[ScalaModel]
 
     // self defined function from db by sql query
-//    @Query(value = "SELECT name FROM scala_model")
+//    @Query(value = "select name from scala_model where age < 22")
 //    def findNameOfAge(): List[Object]
 }

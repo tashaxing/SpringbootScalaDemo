@@ -14,4 +14,8 @@ class PageController
     // use forward instead of redirect will not show xxx.html in browser address bar
     @RequestMapping(Array("/subpage"))
     def sub(): String = "forward:/subpage/newpage.html"
+
+    // no need to redirect apitest
+//    @RequestMapping(Array("/apitest"))
+//    def apitest(): String = "redirect:/apitest.html"
 }

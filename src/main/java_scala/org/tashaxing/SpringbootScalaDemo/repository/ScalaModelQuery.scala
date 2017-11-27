@@ -9,6 +9,8 @@ import java.util.List
 class ScalaModelQuery extends BaseQuery[ScalaModel]
 {
     @Autowired val scalaModelRepository: ScalaModelRepository = null
+
     def findByName(name: String): List[ScalaModel] = scalaModelRepository.findByName(name)
+
 //    def findNameOfAge(): List[Object] = scalaModelRepository.findNameOfAge()
 }
