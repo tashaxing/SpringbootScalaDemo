@@ -1,18 +1,17 @@
 package org.tashaxing.SpringbootScalaDemo.controller
 
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation._
 import org.tashaxing.SpringbootScalaDemo.model.ScalaModel
+import org.tashaxing.SpringbootScalaDemo.repository.ScalaModelQuery
 
-import scala.beans.BeanProperty
 import scala.collection.mutable
 import scala.util.Random
 
-case class MyMessage(@BeanProperty var id: Int, var value: String)
-
 @RestController // here must be restcontroller
 @RequestMapping(Array("/scalatest"))
-class ScalaTestController {
+class ScalaTestController @Autowired()(private val scalaModelQuery: ScalaModelQuery)
+{
     // ---- normal operation
     // root test
     @GetMapping
@@ -78,5 +77,10 @@ class ScalaTestController {
 
     // ---- database operation
 
+    @GetMapping(Array("/listmodel"))
+    def listmodel(): List[ScalaModel] =
+    {
+        return scalaModelQuery.findAll
+    }
 
 }

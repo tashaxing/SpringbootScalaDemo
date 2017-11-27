@@ -70,7 +70,7 @@
 
 	<build>
         <!--source path-->
-        <!--<sourceDirectory>src/main/java_scala</sourceDirectory>-->
+        <sourceDirectory>src/main/java_scala</sourceDirectory>
 
 		<plugins>
 			<plugin>

@@ -1,13 +1,14 @@
 package org.tashaxing.SpringbootScalaDemo.model
 
 import java.lang.Long
-import javax.persistence.{Entity, GeneratedValue, Id}
+import javax.persistence.{Entity, GeneratedValue, Id, Table}
 
 import scala.beans.BeanProperty
 import org.hibernate.validator.constraints.NotEmpty
 
 import scala.annotation.meta.field
 
+@Table(name = "scala_model") // define mysql table name
 @Entity
 case class ScalaModel(
     @(Id @field) @(GeneratedValue @field) @BeanProperty var id: Long,
