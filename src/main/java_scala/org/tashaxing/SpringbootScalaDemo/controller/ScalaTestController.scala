@@ -7,6 +7,10 @@ import org.tashaxing.SpringbootScalaDemo.repository.ScalaModelQuery
 
 import scala.collection.mutable
 import scala.util.Random
+import java.util.List
+import javax.validation.Valid
+
+import org.springframework.validation.BindingResult
 
 @RestController // here must be restcontroller
 @RequestMapping(Array("/scalatest"))
@@ -38,12 +42,12 @@ class ScalaTestController @Autowired()(private val scalaModelQuery: ScalaModelQu
     // get object(frontend will get json structure)
     @GetMapping(Array("/object"))
     def getObject(): ScalaModel = {
-        //        val model = new ScalaModel // if it is defined with class
-        //        model.id = 3L
-        //        model.name = "lucy"
-        //        model.age = 21
+        val model = new ScalaModel // if it is defined with class
+        model.id = 3L
+        model.name = "lucy"
+        model.age = 21
 
-        val model = ScalaModel(5L, "lily", 23) // if it is defined with abstract class
+//        val model = ScalaModel(5L, "lily", 23) // if it is defined with abstract class
         return model
     }
 
@@ -51,7 +55,10 @@ class ScalaTestController @Autowired()(private val scalaModelQuery: ScalaModelQu
     @GetMapping(Array("/object/{id}"))
     def getObject(@PathVariable("id") id: Long): ScalaModel = {
         val random_age = Random.nextInt(10)
-        val model = ScalaModel(id, "tom", 20 + random_age)
+        val model = new ScalaModel
+        model.id = id
+        model.name = "tom"
+        model.age = 20 + random_age
         return model
     }
 
@@ -62,7 +69,11 @@ class ScalaTestController @Autowired()(private val scalaModelQuery: ScalaModelQu
         val model_list = mutable.ArrayBuffer[ScalaModel]()
         for (i <- 0 to 9)
         {
-            val model = ScalaModel(i.toLong, "mary", 30)
+            val model = new ScalaModel
+            model.id = i.toLong
+            model.name = "lily"
+            model.age = 20 + i
+
             model_list += model
         }
         return model_list.toArray
@@ -77,10 +88,50 @@ class ScalaTestController @Autowired()(private val scalaModelQuery: ScalaModelQu
 
     // ---- database operation
 
+    // get all recorde(remember to use java List not scala List)
     @GetMapping(Array("/listmodel"))
     def listmodel(): List[ScalaModel] =
     {
-        return scalaModelQuery.findAll
+        val res = scalaModelQuery.findAll
+
+        // do sth here
+
+        return res
+    }
+
+    // get
+    @GetMapping(value = Array("/findid/{id}"))
+    def findById(@PathVariable(value = "id") id: Long): ScalaModel =
+    {
+        return scalaModelQuery.find(id)
+    }
+
+    @GetMapping(Array("/findname/{name}"))
+    def findByName(@PathVariable("name") name: String): List[ScalaModel] =
+    {
+        return scalaModelQuery.findByName(name)
+    }
+
+    // post
+    @PostMapping(Array("/delete/{id}"))
+    def deleteById(@PathVariable("id") id: Long): Unit =
+    {
+        val res = scalaModelQuery.delete(id)
+        return res
+    }
+
+    @RequestMapping(value = Array("/add"), method = Array(RequestMethod.POST))
+    def save(@RequestBody scalaModel: ScalaModel): ScalaModel =
+    {
+        val res = scalaModelQuery.save(scalaModel)
+        return res
+    }
+
+    @PostMapping(Array("/update"))
+    def update(@RequestBody scalaModel: ScalaModel, bindingResult: BindingResult): ScalaModel =
+    {
+        val res = scalaModelQuery.update(scalaModel)
+        return res
     }
 
 }
