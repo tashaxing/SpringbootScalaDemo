@@ -208,7 +208,7 @@ class ScalaTestController @Autowired()(private val scalaModelQuery: ScalaModelQu
     }
 
     @PostMapping(Array("/slickdelete/{id}"))
-    def slickupdate(@PathVariable("id") id: Long): String =
+    def slickdelete(@PathVariable("id") id: Long): String =
     {
         Await.result(db.run(slick_table.filter(_.id === id).delete), Duration.Inf)
 
