@@ -8,5 +8,6 @@ import org.springframework.boot.autoconfigure.{EnableAutoConfiguration, SpringBo
 class BootConfig
 
 object SpringbootScalaDemoApplication extends App {
+
     SpringApplication.run(classOf[BootConfig])
 }

@@ -25,10 +25,10 @@ export default class ApiTest extends React.Component
         // save one record
         axios({
                 method: 'post',
-                url: '/scalatest/add',
+                url: '/scalatest/slickadd',
                 data: {
-                    id: 7,
-                    name: "tashaxing",
+                    id: 0,
+                    name: "github",
                     age: 25
                 }
             })
@@ -47,9 +47,9 @@ export default class ApiTest extends React.Component
         // update one record
         axios({
             method: 'post',
-            url: '/scalatest/update',
+            url: '/scalatest/slickupdate',
             data: {
-                id: 3,
+                id: 0,
                 name: "tashaxing",
                 age: 25
             }
@@ -66,7 +66,7 @@ export default class ApiTest extends React.Component
     {
         console.log("click delete");
         // save one record
-        axios.post("/scalatest/delete/1")
+        axios.post("/scalatest/slickdelete/6")
             .then(function (response) {
                 console.log(response.data);
             })
