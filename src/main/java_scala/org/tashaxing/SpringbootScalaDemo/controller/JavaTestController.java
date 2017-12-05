@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.tashaxing.SpringbootScalaDemo.model.ScalaModel;
 
 @RestController
 @RequestMapping("/javatest")
@@ -37,5 +38,16 @@ public class JavaTestController {
             list.add(map);
         }
         return list;
+    }
+
+    // test model serialize
+    @GetMapping("/model")
+    public ScalaModel getModel() {
+        ScalaModel scalaModel = new ScalaModel();
+        scalaModel.setId(10L);
+        scalaModel.setName("Ethan");
+        scalaModel.setAge(23);
+
+        return scalaModel;
     }
 }
